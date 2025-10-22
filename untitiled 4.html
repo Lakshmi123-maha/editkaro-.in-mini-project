@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editkaro.in - Video Editing Portfolio</title>
+    <style>
+        /* Previous CSS remains the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #222;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff7e5f;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ff7e5f;
+        }
+        
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .services {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .portfolio {
+            padding: 100px 0;
+            background-color: #f5f5f5;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: #fff;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .portfolio-overlay h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .portfolio-overlay p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .fallback-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Contact Section Styles */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .contact-details {
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form h3 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(90deg, #feb47b, #ff7e5f);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ff7e5f;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #ff7e5f;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            width: 100%;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .filter-buttons {
+                gap: 5px;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Editkaro.in</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Professional Video Editing Services</h1>
+            <p>We transform your raw footage into captivating stories with expert editing, color grading, and motion graphics.</p>
+            <a href="#portfolio" class="btn">View Our Work</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Video Editing</h3>
+                    <p>Professional editing for all types of content including vlogs, documentaries, commercials, and social media videos.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Color Grading</h3>
+                    <p>Enhance the visual appeal of your videos with professional color correction and grading techniques.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Motion Graphics</h3>
+                    <p>Add dynamic animations, titles, and visual effects to make your videos stand out.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Our Portfolio</h2>
+
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="short">Short-Form</button>
+                <button class="filter-btn" data-filter="long">Long-Form</button>
+                <button class="filter-btn" data-filter="gaming">Gaming</button>
+                <button class="filter-btn" data-filter="football">Football</button>
+                <button class="filter-btn" data-filter="ecommerce">eCommerce</button>
+                <button class="filter-btn" data-filter="documentary">Documentary</button>
+                <button class="filter-btn" data-filter="grading">Color Grading</button>
+                <button class="filter-btn" data-filter="anime">Anime</button>
+                <button class="filter-btn" data-filter="ads">Ads</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+
+                <!-- Short Form - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="short">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Short Reel" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">Short Form Video</div>
+                    <div class="portfolio-overlay">
+                        <h3>Dynamic Short Reel</h3>
+                        <p>15-sec social media edit with fast transitions.</p>
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+
+                <!-- Long Form - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="long">
+                    <img src="https://i.ytimg.com/vi/z2fQciTa7SM/maxresdefault.jpg" alt="Long Form Video" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">Long Form Video</div>
+                    <div class="portfolio-overlay">
+                        <h3>Corporate Video Edit</h3>
+                        <p>Professional long-form storytelling edit.</p>
+                        <a href="https://youtu.be/z2fQciTa7SM?si=AjBCPfpqOkLpkhhl" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+
+                <!-- Gaming - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="gaming">
+                    <img src="https://i.ytimg.com/vi/_l3ATod_DOw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCWgpfuVfixwJ2qC537SwrVkeKfFQ" alt="Gaming Montage" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">Gaming Video</div>
+                    <div class="portfolio-overlay">
+                        <h3>Gaming Montage</h3>
+                        <p>High-energy gaming highlights with effects.</p>
+                        <a href="https://youtu.be/_l3ATod_DOw?si=_Fq1PQuv0ksGgMfs" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+
+                <!-- Football - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="football">
+                    <img src="https://i.ytimg.com/vi/pr3diZmY5Uk/maxresdefault.jpg" alt="Football Highlights" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">Football Video</div>
+                    <div class="portfolio-overlay">
+                        <h3>Football Highlights</h3>
+                        <p>Fast-paced sports edit with replay motion.</p>
+                        <a href="https://youtu.be/pr3diZmY5Uk?si=bQ3l35fUVTrQxNUh" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+
+                <!-- eCommerce - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="ecommerce">
+                    <img src="https://i.ytimg.com/vi/H6LqjZpteyI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDRsIzRcRiGUVnFM4xbqZin48vn4A" alt="eCommerce Ad" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">eCommerce Video</div>
+                    <div class="portfolio-overlay">
+                        <h3>Product Ad</h3>
+                        <p>Clean promotional ad for online stores.</p>
+                        <a href="https://youtu.be/H6LqjZpteyI?si=-yJfyYcqaNcFTfOq" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+
+                <!-- Documentary - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="documentary">
+                    <img src="https://i.ytimg.com/vi/D2eIskFVz6Y/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBRKi4rxDdjww_zEJA123l5m2C0Og" alt="Documentary Video" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">Documentary Video</div>
+                    <div class="portfolio-overlay">
+                        <h3>Nature Documentary</h3>
+                        <p>Cinematic storytelling with ambient scoring.</p>
+                        <a href="https://youtu.be/D2eIskFVz6Y?si=JcocYedZAIQi-k1Q" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+
+                <!-- Color Grading - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="grading">
+                    <img src="https://i.ytimg.com/vi/P0zkgyuc9d8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBidVeL3q0QQ9dhYFAAPFSUqDTlTw" alt="Color Grading Reel" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">Color Grading</div>
+                    <div class="portfolio-overlay">
+                        <h3>Color Grading Reel</h3>
+                        <p>Before/after visual grading showcase.</p>
+                        <a href="https://youtu.be/P0zkgyuc9d8?si=UXWY7KtBG6olblgK" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+<!-- Anime - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="anime">
+                    <img src="https://i.ytimg.com/vi/Dypfh8Abcsg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCMmeO23VrhMQp_Oz02uIcfOJpFBw" alt="Anime Edit" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">Anime Video</div>
+                    <div class="portfolio-overlay">
+                        <h3>Anime Edit</h3>
+                        <p>Stylized motion & emotional storytelling.</p>
+                        <a href="https://youtu.be/Dypfh8Abcsg?si=VuQQILqKE0fjKYZm" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+
+                <!-- Ads - REAL WORKING VIDEO -->
+                <div class="portfolio-item" data-category="ads">
+                    <img src="https://i.ytimg.com/vi/jkMi4TrqPIY/maxresdefault.jpg" alt="Advertisement Edit" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-thumbnail" style="display: none;">Advertisement</div>
+                    <div class="portfolio-overlay">
+                        <h3>Brand Advertisement</h3>
+                        <p>Commercial edit with impactful transitions.</p>
+                        <a href="https://youtu.be/oJ-N9EZDFlQ?si=va0nUAbB2NTpLuiL" target="_blank" class="btn">Watch</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Create Something Amazing Together</h3>
+                    <p>Ready to transform your videos? Get in touch with us for a free consultation and quote. We'll help bring your vision to life with professional editing services.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>hello@editkaro.in</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 98765 43210</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Hyderabad, Telangana</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" name="service" class="form-control">
+                                <option value="">Select a service</option>
+                                <option value="video-editing">Video Editing</option>
+                                <option value="color-grading">Color Grading</option>
+                                <option value="motion-graphics">Motion Graphics</option>
+                                <option value="full-package">Full Package</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn submit-btn">Send Message</button>
+                        <div class="success-message" id="successMessage">
+                            Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Editkaro.in</div>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="copyright">
+                    &copy; 2023 Editkaro.in. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Portfolio Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const items = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                const category = btn.getAttribute('data-filter');
+
+                items.forEach(item => {
+                    item.style.display = (category === 'all' || item.dataset.category === category)
+                        ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Thumbnail Fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.portfolio-item img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    const fallback = this.nextElementSibling;
+                    if(fallback && fallback.classList.contains('fallback-thumbnail')) {
+                        fallback.style.display = 'flex';
+                    }
+                };
+            });
+        });
+
+        // Contact Form Handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Here you would typically send the data to a server
+            // For demo purposes, we'll just show success message
+            console.log('Form submitted:', formData);
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
